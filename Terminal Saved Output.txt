@@ -1,0 +1,153 @@
+Last login: Fri May 17 14:52:35 on ttys000
+koraykarsan@Koray-MacBook-Pro-2 ~ % docker pull oracle/database:19.3.0-xe
+
+Error response from daemon: pull access denied for oracle/database, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+koraykarsan@Koray-MacBook-Pro-2 ~ % docker run --name oraclexe -p 1521:1521 -p 5500:5500 -e ORACLE_PWD=YourPasswordHere oracle/database:21.3.0-xe
+Unable to find image 'oracle/database:21.3.0-xe' locally
+docker: Error response from daemon: pull access denied for oracle/database, repository does not exist or may require 'docker login': denied: requested access to the resource is denied.
+See 'docker run --help'.
+koraykarsan@Koray-MacBook-Pro-2 ~ % docker login
+Authenticating with existing credentials...
+Login Succeeded
+koraykarsan@Koray-MacBook-Pro-2 ~ % git clone https://github.com/oracle/docker-images.git
+
+fatal: destination path 'docker-images' already exists and is not an empty directory.
+koraykarsan@Koray-MacBook-Pro-2 ~ % cd docker-images/OracleDatabase/SingleInstance/dockerfiles
+koraykarsan@Koray-MacBook-Pro-2 dockerfiles % ./buildContainerImage.sh -v 19.3.0 -x
+
+WARNING: daemon is not using the default seccomp profile
+Checking Docker version.
+Currently only 19c enterprise edition is supported on ARM64 platform.
+koraykarsan@Koray-MacBook-Pro-2 dockerfiles % docker run --name oraclexe -p 1521:1521 -p 5500:5500 -e ORACLE_PWD=YourPasswordHere oracle/database:21.3.0-xe
+Unable to find image 'oracle/database:21.3.0-xe' locally
+docker: Error response from daemon: pull access denied for oracle/database, repository does not exist or may require 'docker login': denied: requested access to the resource is denied.
+See 'docker run --help'.
+koraykarsan@Koray-MacBook-Pro-2 dockerfiles % ./buildContainerImage.sh -v 19.3.0 -e
+WARNING: daemon is not using the default seccomp profile
+Checking Docker version.
+Dockerfile
+Ignored MD5 sum, 'md5sum' command not available.
+==========================
+Container runtime info:
+Client:
+ Version:    25.0.3
+ Context:    desktop-linux
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.12.1-desktop.4
+    Path:     /Users/koraykarsan/.docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v2.24.6-desktop.1
+    Path:     /Users/koraykarsan/.docker/cli-plugins/docker-compose
+  debug: Get a shell into any image or container. (Docker Inc.)
+    Version:  0.0.24
+    Path:     /Users/koraykarsan/.docker/cli-plugins/docker-debug
+  dev: Docker Dev Environments (Docker Inc.)
+    Version:  v0.1.0
+    Path:     /Users/koraykarsan/.docker/cli-plugins/docker-dev
+  extension: Manages Docker extensions (Docker Inc.)
+    Version:  v0.2.22
+    Path:     /Users/koraykarsan/.docker/cli-plugins/docker-extension
+  feedback: Provide feedback, right in your terminal! (Docker Inc.)
+    Version:  v1.0.4
+    Path:     /Users/koraykarsan/.docker/cli-plugins/docker-feedback
+  init: Creates Docker-related starter files for your project (Docker Inc.)
+    Version:  v1.0.1
+    Path:     /Users/koraykarsan/.docker/cli-plugins/docker-init
+  sbom: View the packaged-based Software Bill Of Materials (SBOM) for an image (Anchore Inc.)
+    Version:  0.6.0
+    Path:     /Users/koraykarsan/.docker/cli-plugins/docker-sbom
+  scout: Docker Scout (Docker Inc.)
+    Version:  v1.5.0
+    Path:     /Users/koraykarsan/.docker/cli-plugins/docker-scout
+
+Server:
+ Containers: 2
+  Running: 0
+  Paused: 0
+  Stopped: 2
+ Images: 1
+ Server Version: 25.0.3
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: true
+  Using metacopy: false
+  Native Overlay Diff: true
+  userxattr: false
+ Logging Driver: json-file
+ Cgroup Driver: cgroupfs
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: ae07eda36dd25f8a1b98dfbf587313b99c0190bb
+ runc version: v1.1.12-0-g51d5e94
+ init version: de40ad0
+ Security Options:
+  seccomp
+   Profile: unconfined
+  cgroupns
+ Kernel Version: 6.6.16-linuxkit
+ Operating System: Docker Desktop
+ OSType: linux
+ Architecture: aarch64
+ CPUs: 8
+ Total Memory: 7.658GiB
+ Name: docker-desktop
+ ID: 35c682c6-863d-4757-bfe4-4e572d753f82
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ HTTP Proxy: http.docker.internal:3128
+ HTTPS Proxy: http.docker.internal:3128
+ No Proxy: hubproxy.docker.internal
+ Experimental: false
+ Insecure Registries:
+  hubproxy.docker.internal:5555
+  127.0.0.0/8
+ Live Restore Enabled: false
+
+WARNING: daemon is not using the default seccomp profile
+==========================
+Building image 'oracle/database:19.3.0-ee' ...
+[+] Building 2.3s (10/15)                                  docker:desktop-linux
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 5.06kB                                     0.0s
+ => [internal] load metadata for docker.io/library/oraclelinux:8           2.2s
+ => [auth] library/oraclelinux:pull token for registry-1.docker.io         0.0s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => CANCELED [base 1/4] FROM docker.io/library/oraclelinux:8@sha256:67c88  0.0s
+ => => resolve docker.io/library/oraclelinux:8@sha256:67c889172b07b1f4067  0.0s
+ => => sha256:67c889172b07b1f4067050abf4bcf7fce2febd280664df2 547B / 547B  0.0s
+ => => sha256:e5c149d8c8d3155b188ea7d7a6f70fd7f6673f078212062 529B / 529B  0.0s
+ => => sha256:1bcb9881afbacba8a597836db8e31f7ae820a242131 1.49kB / 1.49kB  0.0s
+ => [internal] load build context                                          0.0s
+ => => transferring context: 486B                                          0.0s
+ => CACHED [base 2/4] COPY setupLinuxEnv.sh checkSpace.sh /opt/install/    0.0s
+ => CACHED [base 3/4] COPY runOracle.sh startDB.sh createDB.sh createObse  0.0s
+ => CACHED [base 4/4] RUN chmod ug+x /opt/install/*.sh &&     sync &&      0.0s
+ => ERROR [builder 1/2] COPY --chown=oracle:dba LINUX.ARM64_1919000_db_ho  0.0s
+------
+ > [builder 1/2] COPY --chown=oracle:dba LINUX.ARM64_1919000_db_home.zip db_inst.rsp installDBBinaries.sh /opt/install/:
+------
+Dockerfile:108
+--------------------
+ 106 |     
+ 107 |     # Copy DB install file
+ 108 | >>> COPY --chown=oracle:dba $INSTALL_FILE_1 $INSTALL_RSP $INSTALL_DB_BINARIES_FILE $INSTALL_DIR/
+ 109 |     
+ 110 |     # Install DB software binaries
+--------------------
+ERROR: failed to solve: failed to compute cache key: failed to calculate checksum of ref 35c682c6-863d-4757-bfe4-4e572d753f82::p4brt0lqzw7gyluqiw5uiqk54: "/LINUX.ARM64_1919000_db_home.zip": not found
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/ze4ok52odfnpbdmwxf05sn4y7
+
+ERROR: Oracle Database container image was NOT successfully created.
+ERROR: Check the output and correct any reported problems with the build operation.
+koraykarsan@Koray-MacBook-Pro-2 dockerfiles % 
